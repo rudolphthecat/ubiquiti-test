@@ -1,0 +1,52 @@
+.page {
+    --text-color: #808893;
+    --background-tint: #F4F5F6;
+}
+
+.menu {
+    width: 100%;
+    display: flex;
+    padding: 0.5rem;
+    background-color: var(--background-tint);
+    align-items: center;
+}
+
+.titles {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2px 2rem;
+    color: var(--text-color);
+    cursor: default;
+}
+
+.logo {
+    cursor: pointer;
+    transition: all 0.5s;
+    margin-top: 10px;
+}
+
+.logo g {
+    display: none;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+    .logo:hover path {
+        fill: #006FFF;
+        border: 1px solid black;
+        filter: drop-shadow(0px 1px 1px var(--text-color));
+    }
+
+    .logo:hover g {
+        display: unset;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .page {
+        padding: 32px;
+        padding-bottom: 80px;
+    }
+}

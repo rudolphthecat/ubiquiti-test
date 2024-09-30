@@ -1,1 +1,2 @@
-# ubiquiti-test
+# Ubiquiti home assignment
+#### by Lauris Nadzins
