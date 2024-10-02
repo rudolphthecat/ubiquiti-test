@@ -1,7 +1,5 @@
-// import Image from "next/image";
 import styles from "./page.module.css";
-import Filters from "@/app/filters";
-import List from "@/app/list";
+import ListComponent from "@/app/list";
 
 export interface Device {
     id: number,
@@ -10,7 +8,8 @@ export interface Device {
         name: string
     },
     product: {
-        name: string
+        name: string,
+        abbrev?: string
     },
     shortnames: string[],
     images: {
@@ -36,8 +35,7 @@ export default async function Home() {
 
     return (
         <div className={styles.page}>
-            <Filters amount={devices.length} />
-            <List devices={devices} />
+            <ListComponent devices={devices} />
         </div>
     );
 }

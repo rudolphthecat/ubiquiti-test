@@ -1,10 +1,77 @@
-
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-
+.list {
+    margin-top: 1.5rem;
 }
 
-@media (max-width: 600px) {
-    
+.list .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #EDEDF0;
+}
+
+.list .row img {
+    margin: 3px 1rem;
+}
+
+.list .row span:first-child {
+    margin: 3px 1rem;
+}
+
+.list .row span {
+    width: 49%;
+}
+
+/* 45 65 85 */
+.list .row span {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.list .row.data span {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.list .row.data span:nth-last-child(1) {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.grid .block {
+    width: 14rem;
+    /*width: 18rem;*/
+    border: 1px solid #EDEDF0;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 0.5rem;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 700;
+}
+
+.grid .block div:first-child {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    font-size: 12px;
+    color: #006FFF;
+}
+
+.grid .block .name {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 14px;
+}
+
+.grid .block div:last-child {
+    width: 100%;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.45);
 }

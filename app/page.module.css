@@ -1,5 +1,6 @@
 .page {
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 0 2rem;
+    min-width: 450px;
 }
 
 /* Enable hover only on non-touch devices */
@@ -8,9 +9,11 @@
 
 }
 
+/*
 @media (max-width: 600px) {
     .page {
         padding: 32px;
         padding-bottom: 80px;
     }
 }
+*/
