@@ -1,14 +1,29 @@
 import styles from "./filters.module.css";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { viewTypes } from "@/app/list";
+import { uniq, without } from "lodash";
+import { useRouter } from "next/navigation";
 
 type Props = {
     amount: number,
     setViewType: Dispatch<SetStateAction<number>>,
-    viewType: number
+    viewType: number,
+    selectedLines: string[],
+    setSelectedLines: Dispatch<SetStateAction<string[]>>,
+    lines: string[]
 }
 
-export default function Filters({ amount, setViewType, viewType }: Props) {
+export default function Filters(
+    {
+        amount,
+        setViewType,
+        viewType,
+        selectedLines,
+        setSelectedLines,
+        lines
+    }: Props) {
+    const [openFilters, setOpenFilters] = useState<boolean>(false);
+    const router = useRouter();
 
     return (
         <div className={styles.filters}>
@@ -59,7 +74,48 @@ export default function Filters({ amount, setViewType, viewType }: Props) {
                         />
                     </svg>
                 </span>
-                <span>Filter</span>
+                <span>
+                    <label
+                        onClick={() => setOpenFilters(!openFilters)}
+                        className={openFilters ? 'open' : ''}
+                    >
+                        Filter
+                    </label>
+                    {openFilters && <div className={styles.dropdown}>
+                        {lines.map((line, i) => (
+                            <div key={line}>
+                                <input
+                                    type="checkbox"
+                                    value={line}
+                                    checked={selectedLines.indexOf(line) !== -1}
+                                    id={`filters-check-${i}`}
+                                    onChange={() => {
+                                        if (selectedLines.indexOf(line) !== -1) {
+                                            setSelectedLines(without(selectedLines, line));
+                                        } else {
+                                            setSelectedLines(uniq([...selectedLines, line]));
+                                        }
+                                    }}
+                                />
+                                <label htmlFor={`filters-check-${i}`}>{line}</label>
+                            </div>
+                        ))}
+                        <div
+                            className={styles.reset}
+                            style={selectedLines.length ? {
+                                fontWeight: 900,
+                                color: "#F03A3E"
+                            } : {}}
+                            onClick={() => {
+                                router.replace("/");
+                                setSelectedLines([]);
+                            }}
+                        >
+                            Reset
+                        </div>
+                    </div>}
+                </span>
+
             </div>
         </div>
     );

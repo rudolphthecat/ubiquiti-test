@@ -1,0 +1,78 @@
+/*
+Move to global
+*/
+.page {
+    padding: 1rem 2rem 0 2rem;
+    min-width: 450px;
+}
+
+.data {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons a {
+    padding: 0.5rem;
+    margin: 2px;
+    border: 1px solid #EDEDF0;
+    border-radius: 6px;
+}
+
+/*
+.prevnext {
+    display: flex;
+}
+*/
+
+.device {
+    display: flex;
+    justify-content: center;
+    max-width: 80%;
+    /*flex-direction: column;*/
+}
+
+.device img {
+    display: flex;
+    /*width: 50%;*/
+}
+
+.device .params {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.device .params div {
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+}
+
+.device .params div span {
+    width: 50%;
+    display: flex;
+    font-weight: 900;
+}
+
+.device .params div span:nth-child(2) {
+    justify-content: flex-end;
+    color: rgba(0, 0, 0, 0.65);
+    text-align: right;
+    /*font-weight: 100;*/
+}
+
+.device h3 {
+    color: rgba(0, 0, 0, 0.65);
+    padding: 0.5rem 0;
+}
+
+.device .params a {
+    color: #006FFF;
+    padding: 0.5rem 0;
+}

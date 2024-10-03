@@ -43,13 +43,43 @@
     color: #808893;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-
+.filters .dropdown {
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    border: 1px solid #EDEDF0;
+    background-color: white;
+    max-height: 250px;
+    overflow-y: scroll;
 }
 
-@media (max-width: 600px) {
-    
+.filters .dropdown div {
+    display: flex;
+    padding: 1px 0.5rem;
+    align-items: center;
 }
+
+.filters .dropdown input {
+    margin: 0.5rem;
+}
+
+.filters .toggles label {
+    cursor: pointer;
+}
+
+.filters .reset:last-child {
+    padding: 0.5rem 0 1rem 0;
+    color: #F9B0B2
+}
+
+.active {
+    font-weight: 900;
+    color: #F03A3E;
+}
+
