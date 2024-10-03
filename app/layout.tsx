@@ -3,7 +3,7 @@ import "./globals.css";
 import { Lato } from 'next/font/google'
 import styles from "@/app/header.module.css";
 import DeviceProvider from "@/app/device-provider";
-import { concat, uniq } from 'lodash';
+import { uniq } from 'lodash';
 
 const lato = Lato({
     weight: ['300'],
@@ -42,8 +42,8 @@ export interface APIResponse {
 }
 
 async function getDevices() {
-    let res = await fetch('https://static.ui.com/fingerprint/ui/public.json');
-    let json: APIResponse = await res.json()
+    const res = await fetch('https://static.ui.com/fingerprint/ui/public.json');
+    const json: APIResponse = await res.json()
     return json.devices
 }
 
@@ -86,6 +86,7 @@ export default async function RootLayout(
             </html>
         );
     } catch (e) {
+        console.error(e);
         return (
             <html lang="en">
             <body className={`${lato.className} error`}>

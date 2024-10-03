@@ -25,7 +25,7 @@ export default function DeviceView({ params }: { params: { id: string } }) {
         if (!device) {
             router.push("/")
         }
-    }, []);
+    }, [device, router]);
 
     if (!device) return null;
 

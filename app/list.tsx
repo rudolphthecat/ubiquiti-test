@@ -36,7 +36,7 @@ export default function ListComponent() {
         setFilteredDevices(devices);
         const lines = search?.split(',');
         if (lines?.length && !selectedLines.length) {
-            let validQueryParameters: string[] = [];
+            const validQueryParameters: string[] = [];
             lines.forEach(line => {
                 if (filters.indexOf(line) !== -1) {
                     validQueryParameters.push(line);
@@ -46,7 +46,7 @@ export default function ListComponent() {
                 setSelectedLines(validQueryParameters);
             }
         }
-    }, []);
+    }, [devices, filters, search, selectedLines.length, setFilteredDevices]);
 
     useEffect(() => {
         let searchString = '';
@@ -58,7 +58,7 @@ export default function ListComponent() {
         });
         router.replace(searchString ? `/?lines=${encodeURIComponent(searchString)}` : '/');
         setFilteredDevices(selectedLines.length ? filter(devices, device => selectedLines.indexOf(device.line.name) !== -1) : devices);
-    }, [selectedLines]);
+    }, [selectedLines, devices, router, setFilteredDevices]);
 
     return <>
         <Filters

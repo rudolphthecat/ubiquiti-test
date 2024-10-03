@@ -1,7 +1,7 @@
 import styles from "./filters.module.css";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { viewTypes } from "@/app/list";
-import { uniq, without, filter, debounce } from "lodash";
+import { uniq, without, filter } from "lodash";
 import { useRouter } from "next/navigation";
 import { Device } from "@/app/layout";
 import Link from 'next/link'
@@ -48,7 +48,7 @@ export default function Filters(
         } else {
             setSearchResults([]);
         }
-    }, [searchString]);
+    }, [searchString, devices]);
 
     // todo:
     //  * add lodash 'debounce' to input;
