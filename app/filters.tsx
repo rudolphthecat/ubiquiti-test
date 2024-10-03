@@ -61,7 +61,7 @@ export default function Filters(
                 <input type="text" placeholder="Search" onChange={e => setSearchString(e.target.value)}></input>
                 {searchResults.length > 0 &&
                     <div className={styles.matching}>
-                        {searchResults.map(device => {
+                        {searchResults.map((device) => {
                             const index = device.product.name.toLowerCase().indexOf(searchString.toLowerCase());
                             return (
                                 <Link
@@ -70,8 +70,9 @@ export default function Filters(
                                 >
                                     <span>
                                         {index > 0 ? device.product.name.substring(0, index) : null}
-                                        <strong
-                                            className={latoBold.className}>{device.product.name.substring(index, searchString.length + 1)}</strong>
+                                        <strong className={latoBold.className}>
+                                            {device.product.name.substring(index, index + searchString.length)}
+                                        </strong>
                                         {index + searchString.length !== device.product.name.length ? device.product.name.substring(index + searchString.length, device.product.name.length - 1) : null}
                                     </span>
                                 </Link>
@@ -124,7 +125,7 @@ export default function Filters(
                 <span>
                     <label
                         onClick={() => setOpenFilters(!openFilters)}
-                        className={openFilters ? 'open' : ''}
+                        className={openFilters ? styles.open : ''}
                     >
                         Filter
                     </label>

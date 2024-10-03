@@ -32,6 +32,14 @@
 
 .search input {
     padding: 2px 0 2px 26px;
+    background-color: #F6F6F8;
+    border: 0;
+    appearance: none;
+    -webkit-appearance: none
+}
+
+.search input:hover {
+    background-color: #EDEDF0;
 }
 
 .search input:focus::placeholder {
@@ -76,13 +84,22 @@
     display: flex;
 }
 
+.toggles span:hover {
+    background-color: #F4F5F6;
+}
+
 .toggles span {
-    margin: 0 0.5rem;
+    margin: 0 2px;
+    padding: 5px;
     cursor: pointer;
     color: #808893;
     display: flex;
     align-items: center;
     position: relative;
+}
+
+.filters .open {
+    color: #006FFF;
 }
 
 .filters .dropdown {
