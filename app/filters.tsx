@@ -1,8 +1,11 @@
 import styles from "./filters.module.css";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { viewTypes } from "@/app/list";
-import { uniq, without } from "lodash";
+import { uniq, without, filter, debounce } from "lodash";
 import { useRouter } from "next/navigation";
+import { Device } from "@/app/layout";
+import Link from 'next/link'
+import { Lato } from "next/font/google";
 
 type Props = {
     amount: number,
@@ -10,8 +13,14 @@ type Props = {
     viewType: number,
     selectedLines: string[],
     setSelectedLines: Dispatch<SetStateAction<string[]>>,
-    lines: string[]
+    lines: string[],
+    devices: Device[]
 }
+
+const latoBold = Lato({
+    weight: ['700'],
+    subsets: ['latin']
+});
 
 export default function Filters(
     {
@@ -20,17 +29,55 @@ export default function Filters(
         viewType,
         selectedLines,
         setSelectedLines,
-        lines
+        lines,
+        devices
     }: Props) {
     const [openFilters, setOpenFilters] = useState<boolean>(false);
+    const [searchString, setSearchString] = useState<string>('');
+    const [searchResults, setSearchResults] = useState<Array<Device>>([]);
     const router = useRouter();
+
+    useEffect(() => {
+        if (searchString) {
+            const matches = filter(devices, device => {
+                // todo: search 'abbrev' values as well
+                return device.product.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1
+            });
+            console.log(devices)
+            setSearchResults(matches);
+        } else {
+            setSearchResults([]);
+        }
+    }, [searchString]);
+
+    // todo:
+    //  * add lodash 'debounce' to input;
+    //  * add 'blur' events to dropdowns and 'options';
 
     return (
         <div className={styles.filters}>
             <div className={styles.search}>
-                <label>
-                    <input type="text" placeholder="Search"></input>
-                </label>
+                <label />
+                <input type="text" placeholder="Search" onChange={e => setSearchString(e.target.value)}></input>
+                {searchResults.length > 0 &&
+                    <div className={styles.matching}>
+                        {searchResults.map(device => {
+                            const index = device.product.name.toLowerCase().indexOf(searchString.toLowerCase());
+                            return (
+                                <Link
+                                    href={`/device/${device.id}`}
+                                    key={device.id}
+                                >
+                                    <span>
+                                        {index > 0 ? device.product.name.substring(0, index) : null}
+                                        <strong
+                                            className={latoBold.className}>{device.product.name.substring(index, searchString.length + 1)}</strong>
+                                        {index + searchString.length !== device.product.name.length ? device.product.name.substring(index + searchString.length, device.product.name.length - 1) : null}
+                                    </span>
+                                </Link>
+                            )
+                        })}
+                    </div>}
                 <span>{amount} devices</span>
             </div>
             <div className={styles.toggles}>

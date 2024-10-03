@@ -12,14 +12,21 @@
     position: relative;
 }
 
-.search label:before {
+.search span {
+    cursor: default;
+    color: #BDBDBD;
+    padding-left: 1rem;
+}
+
+.search > label:before {
     content: "";
     position: absolute;
     cursor: text;
     left: 5px;
-    top: 0;
+    top: -10px;
     bottom: 0;
     width: 20px;
+    height: 20px;
     background: url("data:image/svg+xml, %3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M16.853%2016.1465L14.006%2013.3025C14.937%2012.2115%2015.5%2010.7975%2015.5%209.25049C15.5%205.79849%2012.702%203.00049%209.25%203.00049C5.798%203.00049%203%205.79849%203%209.25049C3%2012.7025%205.798%2015.5005%209.25%2015.5005C10.795%2015.5005%2012.208%2014.9385%2013.299%2014.0095L16.147%2016.8535C16.245%2016.9515%2016.372%2016.9995%2016.5%2016.9995C16.628%2016.9995%2016.756%2016.9505%2016.854%2016.8525C17.049%2016.6585%2017.049%2016.3415%2016.853%2016.1465ZM4%209.25049C4%206.35549%206.355%204.00049%209.25%204.00049C12.145%204.00049%2014.5%206.35549%2014.5%209.25049C14.5%2012.1455%2012.145%2014.5005%209.25%2014.5005C6.355%2014.5005%204%2012.1455%204%209.25049Z%22%20fill%3D%22%23838691%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
 }
 
@@ -27,10 +34,42 @@
     padding: 2px 0 2px 26px;
 }
 
-.search span {
-    cursor: default;
-    color: #BDBDBD;
-    padding-left: 1rem;
+.search input:focus::placeholder {
+    color: transparent;
+}
+
+.matching {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 97px;
+    background-color: white;
+    z-index: 1001;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
+}
+
+.filter .search .matching a span {
+    color: black !important;
+}
+
+.matching a {
+    padding: 3px;
+}
+
+.matching a:hover {
+    background-color: #808893;
+}
+
+.matching a span {
+    cursor: pointer;
+    color: black;
+    padding: 0;
+}
+
+.matching a span strong {
+    font-weight: 900;
+    border-bottom: 1px solid black;
 }
 
 .toggles {
@@ -47,11 +86,13 @@
 }
 
 .filters .dropdown {
+    width: 160px;
     z-index: 1001;
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 2rem;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2));
     right: 0;
     border: 1px solid #EDEDF0;
     background-color: white;
@@ -74,8 +115,9 @@
 }
 
 .filters .reset:last-child {
-    padding: 0.5rem 0 1rem 0;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
     color: #F9B0B2
+
 }
 
 .active {

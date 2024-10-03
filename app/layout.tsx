@@ -22,7 +22,8 @@ export interface Device {
         name: string
     },
     product: {
-        name: string
+        name: string,
+        abbrev: string
     },
     shortnames: string[],
     images: {

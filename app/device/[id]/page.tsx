@@ -36,11 +36,13 @@ export default function DeviceView({ params }: { params: { id: string } }) {
         <div className={styles.page}>
             <div className={styles.buttons}>
                 <div>
-                    {/*<Link href="/">{"<"} Back</Link>*/}
+                    <Link href="/">{"<"} Back</Link>
+                    {/*
                     <a href="" onClick={(e) => {
                         e.preventDefault();
                         return router.back()
                     }}>{"<"} Back</a>
+                    */}
                 </div>
                 <div className={styles.prevnext}>
                     <Link href={`/device/${prevDevice.id}`}>{"<"}</Link>

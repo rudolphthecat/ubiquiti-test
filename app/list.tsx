@@ -1,7 +1,6 @@
 "use client"
 
 import styles from "./list.module.css";
-import { Device } from "@/app/layout";
 import { DeviceContext, State } from "@/app/device-provider";
 import { Virtuoso } from 'react-virtuoso'
 import { Lato } from 'next/font/google'
@@ -69,6 +68,7 @@ export default function ListComponent() {
             selectedLines={selectedLines}
             setSelectedLines={setSelectedLines}
             lines={filters}
+            devices={devices}
         />
         {viewType === viewTypes.list ? <div className={styles.list}>
             <div className={`${styles.row} ${latoBold.className}`}>
