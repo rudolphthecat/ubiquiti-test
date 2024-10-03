@@ -1,11 +1,12 @@
 "use client"
 
 import styles from "./list.module.css";
-import { Device } from "@/app/page";
+import { Device } from "@/app/layout";
+import { DeviceContext } from "@/app/device-provider";
 import { Virtuoso } from 'react-virtuoso'
 import { Lato } from 'next/font/google'
 import Filters from "@/app/filters";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Link from 'next/link'
 
 export const viewTypes = {
@@ -22,12 +23,13 @@ type Props = {
     devices: Array<Device>
 }
 
-export default function ListComponent({ devices }: Props) {
+export default function ListComponent() {
     const [viewType, setViewType] = useState(viewTypes.list);
+    const devices = useContext(DeviceContext);
 
     // TODO: move loader appropriately, render filters even if data is not present (or should it?)
     if (!devices.length) return <div>Loading...</div>
-    // console.log(devices)
+
     return <>
         <Filters
             amount={devices.length}
@@ -49,7 +51,7 @@ export default function ListComponent({ devices }: Props) {
                         <Link
                             className={`${styles.row} ${styles.data}`}
                             key={device.id}
-                            href={`/${device.id}`}
+                            href={`/device/${device.id}`}
                         >
                             <img
                                 src={`https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${640}&q=75`}
@@ -72,7 +74,7 @@ export default function ListComponent({ devices }: Props) {
                 <Link
                     className={styles.block}
                     key={device.id}
-                    href={`/${device.id}`}
+                    href={`/device/${device.id}`}
                 >
                     <div>
                         {device.line.name}

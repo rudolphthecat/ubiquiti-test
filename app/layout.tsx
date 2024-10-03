@@ -2,25 +2,56 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Lato } from 'next/font/google'
 import styles from "@/app/header.module.css";
+import DeviceProvider from "@/app/device-provider";
 
 const lato = Lato({
     weight: ['300'],
     subsets: ['latin']
 });
 
-console.log(Object.keys(lato))
-
 export const metadata: Metadata = {
     title: "Ubiquiti devices",
     description: "test assignment",
 };
 
-export default function RootLayout(
+export interface Device {
+    id: number,
+    line: {
+        id: string,
+        name: string
+    },
+    product: {
+        name: string,
+        abbrev?: string
+    },
+    shortnames: string[],
+    images: {
+        default: string
+    }
+}
+
+export interface APIResponse {
+    devices: Device[],
+    version: string
+}
+
+async function getDevices() {
+    let res = await fetch('https://static.ui.com/fingerprint/ui/public.json');
+    let json: APIResponse = await res.json()
+    // TODO: fail gracefully instead of a 404 page
+    // if (json.devices) notFound()
+    return json.devices
+}
+
+export default async function RootLayout(
     {
         children,
     }: Readonly<{
         children: React.ReactNode;
     }>) {
+
+    let devices = await getDevices();
+
     return (
         <html lang="en">
         <body className={lato.className}>
@@ -41,7 +72,9 @@ export default function RootLayout(
                 <span>Lauris Nadzins</span>
             </div>
         </div>
-        {children}
+        <DeviceProvider value={devices}>
+            {children}
+        </DeviceProvider>
         </body>
         </html>
     );
