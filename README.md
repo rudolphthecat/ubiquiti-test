@@ -1,2 +1,1 @@
-# Ubiquiti home assignment
-#### by Lauris Nadzins
+# Home assignment
